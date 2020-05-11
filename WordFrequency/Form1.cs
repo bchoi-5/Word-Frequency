@@ -26,7 +26,7 @@ namespace WordFrequency
             {
                 string fileText = "";
                 string lowercaseFileText = "";
-
+                
                 StreamReader inputFile;
 
                 if(openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -40,37 +40,29 @@ namespace WordFrequency
                     inputFile.Close();
 
                     lowercaseFileText = fileText.ToLower();
-                    string[] tokens = lowercaseFileText.Split(new char[] {' ', '.', ','});
+                    string[] tokens = lowercaseFileText.Split(new char[] { ' ', '.', ',' }, ' ');
 
                     foreach (string s in tokens)
                     {
-                        for (int i = 0; i < tokens.Length; i++)
+                        if (!wordCount.ContainsKey(s))
                         {
-                            if (s == tokens[i])
-                            {
-                                wordCount.Add(s, +1);
-                            }
+                            wordCount.Add(s, 1);
+                        }
+                        else
+                        {
+                            wordCount[s] += 1;
                         }
                     }
-
-
-                    //for (int i = 0; i<tokens.Length; i++)
-                    //{
-                    //    foreach(string s in tokens)
-                    //    {
-                    //        if (s == tokens[i])
-                    //        {
-                    //            wordCount.Add(s, +1);
-                    //        }
-                    //    }
-                    //}
-
-
+                    
+                    foreach (var word in wordCount)
+                    {
+                        listBox1.Items.Add(word.Key + " : " + word.Value);
+                    }
+                    
                 } else
                 {
                     MessageBox.Show("Operation cancelled.");
-                }
-                
+                } 
             }
             catch
             {
