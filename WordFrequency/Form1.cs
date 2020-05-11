@@ -40,12 +40,32 @@ namespace WordFrequency
                     inputFile.Close();
 
                     lowercaseFileText = fileText.ToLower();
-                    string[] tokens = fileText.Split(null);
+                    string[] tokens = lowercaseFileText.Split(new char[] {' ', '.', ','});
 
                     foreach (string s in tokens)
                     {
-                        MessageBox.Show(s);
+                        for (int i = 0; i < tokens.Length; i++)
+                        {
+                            if (s == tokens[i])
+                            {
+                                wordCount.Add(s, +1);
+                            }
+                        }
                     }
+
+
+                    //for (int i = 0; i<tokens.Length; i++)
+                    //{
+                    //    foreach(string s in tokens)
+                    //    {
+                    //        if (s == tokens[i])
+                    //        {
+                    //            wordCount.Add(s, +1);
+                    //        }
+                    //    }
+                    //}
+
+
                 } else
                 {
                     MessageBox.Show("Operation cancelled.");
